@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Publisher;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -37,12 +38,19 @@ class BookController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'author_id' => 'required|integer',
-            'publisher_id' => 'required|integer',
+            'author_id' => 'required|integer|exists:authors,id',
+            'publisher_id' => 'required|integer|exists:publishers,id',
             'published_year' => 'required|integer',
             'categories' => 'required|array',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // Lida com o upload da imagem de capa, se houver
+        if ($request->hasFile('cover_image')) {
+            $validatedData['cover_image'] = $request->file('cover_image')->store('cover_images');
+        }
+
+        // Cria o livro e associa as categorias
         $book = Book::create($validatedData);
         $book->categories()->attach($request->categories);
 
@@ -64,13 +72,24 @@ class BookController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'author_id' => 'required|integer',
-            'publisher_id' => 'required|integer',
+            'author_id' => 'required|integer|exists:authors,id',
+            'publisher_id' => 'required|integer|exists:publishers,id',
             'published_year' => 'required|integer',
             'categories' => 'required|array',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $book = Book::findOrFail($id);
+
+        // Lida com o upload da nova imagem de capa, se houver, e remove a antiga
+        if ($request->hasFile('cover_image')) {
+            if ($book->cover_image) {
+                Storage::delete($book->cover_image);
+            }
+            $validatedData['cover_image'] = $request->file('cover_image')->store('cover_images');
+        }
+
+        // Atualiza o livro e as categorias associadas
         $book->update($validatedData);
         $book->categories()->sync($request->categories);
 
@@ -81,9 +100,18 @@ class BookController extends Controller
     public function destroy($id)
     {
         $book = Book::findOrFail($id);
+
+        // Remove a imagem de capa do armazenamento, se houver
+        if ($book->cover_image) {
+            Storage::delete($book->cover_image);
+        }
+
+        // Desassocia as categorias e exclui o livro
         $book->categories()->detach();
         $book->delete();
 
         return redirect()->route('books.index')->with('success', 'Livro excluído com sucesso!');
     }
+
+    
 }

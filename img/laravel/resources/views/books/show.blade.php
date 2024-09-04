@@ -4,6 +4,9 @@
     <div class="container">
         <h1>{{ $book->title }}</h1>
         <p><strong>Autor:</strong> {{ $book->author->name }}</p>
+        @if($book->cover_image)
+            <img src="{{ Storage::url($book->cover_image) }}" alt="Capa do Livro">
+        @endif
         <p><strong>Editora:</strong> {{ $book->publisher->name }}</p>
         <p><strong>Ano de Publicação:</strong> {{ $book->published_year }}</p>
         <p><strong>Categorias:</strong> 
