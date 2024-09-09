@@ -21,13 +21,13 @@
             <label for="role">Escolha o Papel:</label>
             <select name="role" id="role" class="form-control">
 
-                <option value="1" {{ old('role', $user->role) == 1 ? 'selected' : '' }}>
+                <option value="admin" {{ old('role', $user->role) == "admin" ? 'selected' : '' }}>
                     Admin
                 </option>
-                <option value="2" {{ old('role', $user->role) == 2 ? 'selected' : '' }}>
+                <option value="bibliotecario" {{ old('role', $user->role) == "bibliotecario" ? 'selected' : '' }}>
                     Bibliotecario(a)
                 </option>
-                <option value="3" {{ old('role', $user->role) == 3 ? 'selected' : '' }}>
+                <option value="cliente" {{ old('role', $user->role) == "cliente" ? 'selected' : '' }}>
                     Cliente
                 </option>
             </select>

@@ -14,11 +14,11 @@ class UserController extends Controller
     }
     public function create()
     {
-        //
+        // Não tem pq criar, o laravel já faz isso :)
     }
     public function store(Request $request)
     {
-        //
+        // Laravel já faz isso :)
     }
     public function show(string $id)
     {
@@ -48,7 +48,7 @@ class UserController extends Controller
                 'min:8',
                 'confirmed'
             ],
-            'role' => ['required', 'int'],
+            'role' => ['required', 'string'],
         ]);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];

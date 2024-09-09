@@ -18,11 +18,11 @@ mb-3">Adicionar Novo Usuário</a>
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                @if ($user->role == 1)
+                @if ($user->role == "admin")
                 <td>Admin</td>
-                @elseif ($user->role == 2)
+                @elseif ($user->role == "bibliotecario")
                 <td>Bibliotecário(a)</td>
-                @elseif ($user->role == 3)
+                @elseif ($user->role == "cliente")
                 <td>Cliente</td>
                 @endif
                 <td>
