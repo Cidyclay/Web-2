@@ -15,7 +15,9 @@
             @endforeach
         </p>
         <a href="{{ route('books.index') }}" class="btn btn-primary">Voltar à Lista</a>
+        @can('isAdmin', Auth::user())
         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Editar</a>
+        @endcan
         <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline-block;">
             @csrf
             @method('DELETE')

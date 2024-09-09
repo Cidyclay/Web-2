@@ -27,7 +27,9 @@
                         </td>
                         <td>
                             <a href="{{ route('books.show', $book->id) }}" class="btn btn-info">Ver</a>
+                            @can('isAdmin', Auth::user())
                             <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Editar</a>
+                            @endcan
                             <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
