@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -28,5 +28,5 @@ Route::resource('publishers', PublisherController::class);
 // Rotas para Users
 Route::resource('users', UserController::class);
 
-
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
