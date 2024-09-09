@@ -13,8 +13,10 @@
                 <label for="address" class="form-label">Endereço</label>
                 <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">
             </div>
+            @cannot('isCliente', Auth::user())
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{{ route('publishers.index') }}" class="btn btn-secondary">Cancelar</a>
+            @endcannot
         </form>
     </div>
 @endsection

@@ -51,8 +51,10 @@
                 <label for="cover_image" class="form-label">Capa do Livro</label>
                 <input type="file" class="form-control" id="cover_image" name="cover_image">
             </div>
+            @cannot('isCliente', Auth::user())
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{{ route('books.index') }}" class="btn btn-secondary">Cancelar</a>
+            @endcannot
         </form>
     </div>
 @endsection

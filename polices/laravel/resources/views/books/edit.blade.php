@@ -46,8 +46,10 @@
                     @endforeach
                 </select>
             </div>
+            @cannot('isCliente', Auth::user())
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="{{ route('books.index') }}" class="btn btn-secondary">Cancelar</a>
+            @endcannot
         </form>
     </div>
 @endsection

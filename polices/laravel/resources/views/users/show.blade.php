@@ -12,13 +12,14 @@
     <p><strong>Role:</strong> Cliente </p>
     @endif
     <a href="{{ route('users.index') }}" class="btn btn-primary">Voltar à Lista</a>
-    @can('edit', Auth::user())
+    @can('isAdmin', Auth::user())
     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Editar</a>
     <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
         @csrf
         @method('DELETE')
+        
         <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este livro?')">Excluir</button>
-
         @endcan
+        
 </div>
 @endsection

@@ -11,11 +11,13 @@
             @endforeach
         </ul>
         <a href="{{ route('publishers.index') }}" class="btn btn-primary">Voltar à Lista</a>
+        @cannot('isCliente', Auth::user())
         <a href="{{ route('publishers.edit', $publisher->id) }}" class="btn btn-warning">Editar</a>
         <form action="{{ route('publishers.destroy', $publisher->id) }}" method="POST" style="display:inline-block;">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta editora?')">Excluir</button>
         </form>
+        @endcannot
     </div>
 @endsection

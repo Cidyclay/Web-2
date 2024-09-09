@@ -9,8 +9,10 @@
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
             </div>
+            @cannot('isCliente', Auth::user())
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancelar</a>
+            @endcannot
         </form>
     </div>
 @endsection

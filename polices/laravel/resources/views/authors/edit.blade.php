@@ -15,8 +15,10 @@
                 <label for="birth_date" class="form-label">Data de Nascimento</label>
                 <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ old('birth_date', $author->birth_date) }}">
             </div>
+            @cannot('isCliente', Auth::user())
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <a href="{{ route('authors.index') }}" class="btn btn-secondary">Cancelar</a>
+            @endcannot
         </form>
     </div>
 @endsection

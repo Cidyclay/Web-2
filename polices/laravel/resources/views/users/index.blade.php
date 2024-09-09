@@ -2,8 +2,10 @@
 @section('content')
 <div class="container">
     <h1>Lista de Usuários</h1>
+    @cannot('isCliente', Auth::user())
     <a href="{{ route('users.create') }}" class="btn btn-primary
 mb-3">Adicionar Novo Usuário</a>
+    @endcannot
     <table class="table table-bordered">
         <thead>
             <tr>
