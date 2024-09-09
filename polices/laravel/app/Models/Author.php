@@ -10,5 +10,9 @@ class Author extends Model
     'name',
     'birth_date',
 ];
+public function books()
+{
+    return $this->hasMany(Book::class);
+}
     use HasFactory;
 }
